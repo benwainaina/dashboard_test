@@ -15,6 +15,17 @@
     "declaration": false,
     "experimentalDecorators": true,
     "moduleResolution": "bundler",
+    "paths": {
+      "home": [
+        "./dist/home"
+      ],
+      "shared": [
+        "./dist/shared"
+      ],
+      "user": [
+        "./dist/user"
+      ]
+    },
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
