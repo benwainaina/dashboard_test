@@ -4,6 +4,62 @@
   border-radius: 12px;
   margin-top: -20px;
   z-index: 10;
-  padding: 24px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  width: 300px;
+  height: 300px;
+  border-radius: 12px;
+
+  &__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    &__background {
+      position: absolute;
+      width: 100%;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      border-radius: 12px;
+      transform: scaleX(-1);
+    }
+
+    &__content {
+      position: absolute;
+      background-color: white;
+      padding: 13px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 12px;
+      box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.5);
+
+      &__email {
+        color: #07abfd;
+        text-decoration: underline;
+        font-size: 14px;
+      }
+    }
+
+    &__action {
+      text-align: center;
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      background-color: black;
+      color: white;
+      padding: 16px 0;
+      border-radius: 0 0 12px 12px;
+      text-transform: capitalize;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
 }

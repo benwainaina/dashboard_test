@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IAppSlice } from '../../../../../src/app/state_manager/interfaces';
-import { IUserSlice, UserSliceName } from './interfaces';
+import { IUserData, IUserSlice, UserSliceName } from './interfaces';
+import { IDynamicObject } from '../../../shared/src/lib/state_manager/interfaces';
 
 const userSlice = createFeatureSelector<IUserSlice>(UserSliceName);
 
@@ -31,4 +32,13 @@ const selectPageSlice = createSelector(userSlice, (slice) => slice.pagination);
 export const selectCurrentPage = createSelector(
   selectPageSlice,
   (slice) => slice.currentPage || 1
+);
+
+/**
+ * select preview user data
+ */
+export const selectPreviewUserData = createSelector(
+  selectUsersLists,
+  (userList: Array<IUserData>, props: IDynamicObject) =>
+    userList.find((user) => user.id.toString() === props['userId']?.toString())
 );

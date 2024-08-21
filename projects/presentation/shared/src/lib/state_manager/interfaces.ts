@@ -36,6 +36,10 @@ export interface INotificationData {
   message: string;
 }
 
+export interface IDynamicObject {
+  [key: string]: any;
+}
+
 export interface ISharedSlice {
   /**
    * whether there is any notification information

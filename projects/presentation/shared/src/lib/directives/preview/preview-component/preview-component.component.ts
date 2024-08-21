@@ -5,6 +5,7 @@ import {
   ElementRef,
   inject,
   Input,
+  OnInit,
   ViewChild,
 } from '@angular/core';
 import {
@@ -12,27 +13,41 @@ import {
   TPreviewPlacement,
 } from '../../../state_manager/interfaces';
 import { renderer2Utility } from '../../../utilities/renderer2.utility';
+import { Observable } from 'rxjs';
+import { IUserData } from '../../../../../../user/src/state_manager/interfaces';
+import { selectDataUtility } from '../../../utilities/selectData.utility';
+import { selectPreviewUserData } from '../../../../../../user/src/state_manager/selectors';
+import { AsyncPipe, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-preview-component',
   standalone: true,
-  imports: [],
+  imports: [NgStyle, AsyncPipe],
   templateUrl: './preview-component.component.html',
   styleUrl: './preview-component.component.scss',
 })
-export class PreviewComponentComponent implements AfterViewInit {
+export class PreviewComponentComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) public userId!: string;
   @Input({ required: true }) public position!: IPreviewPosition;
   @ViewChild('outlet', { static: true })
   private _outlet!: ElementRef<HTMLDivElement>;
-
-  private _changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
+  @ViewChild('contentElementRef', { static: true })
+  private _contentElementRef!: ElementRef<HTMLDivElement>;
   private _renderer2Utility = renderer2Utility();
-  private _hostElement: ElementRef = inject(ElementRef);
+  private _selectDataUtility = selectDataUtility();
+  public userData$!: Observable<IUserData>;
+
+  constructor() {}
+
+  ngOnInit(): void {
+    this.userData$ = this._selectDataUtility(selectPreviewUserData, {
+      userId: this.userId,
+    });
+  }
 
   ngAfterViewInit(): void {
-    this._changeDetectorRef.detectChanges();
     this._pickPlacementPosition();
+    this._placeContentElement();
   }
 
   private _pickPlacementPosition(): void {
@@ -40,8 +55,6 @@ export class PreviewComponentComponent implements AfterViewInit {
       zone,
       hostCenterX: cardCenterX,
       hostCenterY: cardCenterY,
-      hostX: cardStartX,
-      hostY: cardStartY,
     } = this.position;
 
     switch (zone) {
@@ -118,5 +131,15 @@ export class PreviewComponentComponent implements AfterViewInit {
 
   private _getHostElementDomRect(): DOMRect {
     return this._outlet.nativeElement.getBoundingClientRect() || {};
+  }
+
+  private _placeContentElement(): void {
+    const { height } =
+      this._contentElementRef.nativeElement.getBoundingClientRect();
+    this._renderer2Utility(
+      this._contentElementRef.nativeElement,
+      'top',
+      `${(height / 2) * -1}px`
+    );
   }
 }
