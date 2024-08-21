@@ -9,6 +9,7 @@ import { selectCurrentPage } from './selectors';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { actionSetNotificationData } from '../../../shared/src/lib/state_manager/actions';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
+import { IUserData } from './interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +31,7 @@ export class UserEffect {
         this._apiService.get('users', `page=${currentPage}`).pipe(
           map((res) =>
             UserActions.actionSetUsers({
-              users: res.data,
+              users: mapUserData(res.data),
               pageMeta: { pages: res.total_pages, perPage: res.per_page },
             })
           ),
@@ -49,3 +50,12 @@ export class UserEffect {
     )
   );
 }
+
+const mapUserData = (users: Array<any>): Array<IUserData> =>
+  users.map((user) => ({
+    image: user.avatar,
+    email: user.email,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    id: user.id,
+  }));

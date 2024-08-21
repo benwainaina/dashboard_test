@@ -97,10 +97,27 @@
 
   &__search {
     grid-area: search;
+    display: flex;
+    align-items: center;
+
+    form {
+      width: 100%;
+      padding: 21px 36px;
+      padding-left: 0;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 21px 0px 21px 8px;
+      outline: none;
+      border: 1px solid #cbcbcb;
+      border-radius: 36px;
+    }
   }
 
   &__content {
     grid-area: content;
+    overflow: auto;
   }
 }
 

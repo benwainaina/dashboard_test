@@ -1,5 +1,9 @@
 .wrapper {
-  background-color: red;
-  height: 100%;
-  overflow: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 44px;
+
+  @media only screen and (max-width: 1218px) {
+    justify-content: center;
+  }
 }

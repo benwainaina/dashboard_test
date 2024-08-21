@@ -2,6 +2,18 @@ export const SharedSliceName = 'shared';
 
 export type TNotificationType = 'success' | 'error' | undefined;
 
+export interface IListDisplayItem {
+  /**
+   * input to be projected into the component
+   */
+  componentInput: any;
+
+  /**
+   * component to be rendered
+   */
+  componentRef: any;
+}
+
 export interface INotificationData {
   /**
    * the type of notification
