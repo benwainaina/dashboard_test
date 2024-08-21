@@ -9,7 +9,13 @@ import { PagesComponentComponent } from '../../../shared/src/lib/components/page
 import { dispatchActionUtility } from '../../../shared/src/lib/utilities/dispatchAction.utility';
 import { ListDisplayComponent } from '../../../shared/src/lib/components/list-display/list-display.component';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
-import { debounceTime, distinctUntilChanged, Subject, takeUntil } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  firstValueFrom,
+  Subject,
+  takeUntil,
+} from 'rxjs';
 import { selectUsersLists } from '../../../user/src/state_manager/selectors';
 import { actionGetUsers } from '../../../user/src/state_manager/actions';
 import { IUserData } from '../../../user/src/state_manager/interfaces';
@@ -54,18 +60,24 @@ export class HomeComponent {
       .get('searchField')
       ?.valueChanges.pipe(distinctUntilChanged(), debounceTime(300))
       .subscribe({
-        next: (searchValue) => {
-          console.log('search value', searchValue);
+        next: async (searchValue) => {
+          const usersList = await firstValueFrom(this._usersList$);
+          this._createUserListItems(
+            usersList.filter((user: IUserData) =>
+              user.id.toString().includes(searchValue)
+            )
+          );
         },
       });
   }
 
   private _createUserListItems(usersList: Array<IUserData>): void {
-    usersList.forEach((user) =>
-      this.usersList.push({
-        componentInput: user,
-        componentRef: UserCardComponent,
-      })
-    );
+    if (!usersList) {
+      console.log('none', usersList);
+    }
+    this.usersList = usersList.map((user) => ({
+      componentInput: user,
+      componentRef: UserCardComponent,
+    }));
   }
 }
