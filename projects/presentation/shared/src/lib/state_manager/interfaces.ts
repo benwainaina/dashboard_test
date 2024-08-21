@@ -2,6 +2,16 @@ export const SharedSliceName = 'shared';
 
 export type TNotificationType = 'success' | 'error' | undefined;
 
+export type TPreviewPlacement = 'a' | 'b' | 'c' | 'd';
+
+export interface IPreviewPosition {
+  hostX: number;
+  hostY: number;
+  hostCenterX: number;
+  hostCenterY: number;
+  zone: TPreviewPlacement;
+}
+
 export interface IListDisplayItem {
   /**
    * input to be projected into the component
