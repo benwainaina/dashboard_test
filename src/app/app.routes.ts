@@ -9,7 +9,7 @@ export const routes: Routes = [
       ),
   },
   {
-    path: 'user',
+    path: 'user/:id',
     loadComponent: () =>
       import('../../projects/presentation/user/src/lib/user.component').then(
         (c) => c.UserComponent

@@ -18,6 +18,7 @@ import { IUserData } from '../../../../../../user/src/state_manager/interfaces';
 import { selectDataUtility } from '../../../utilities/selectData.utility';
 import { selectPreviewUserData } from '../../../../../../user/src/state_manager/selectors';
 import { AsyncPipe, NgStyle } from '@angular/common';
+import { routerUtility } from '../../../utilities/router.utility';
 
 @Component({
   selector: 'app-preview-component',
@@ -35,6 +36,8 @@ export class PreviewComponentComponent implements AfterViewInit, OnInit {
   private _contentElementRef!: ElementRef<HTMLDivElement>;
   private _renderer2Utility = renderer2Utility();
   private _selectDataUtility = selectDataUtility();
+  private _routerUtility = routerUtility();
+
   public userData$!: Observable<IUserData>;
 
   constructor() {}
@@ -141,5 +144,9 @@ export class PreviewComponentComponent implements AfterViewInit, OnInit {
       'top',
       `${(height / 2) * -1}px`
     );
+  }
+
+  public viewDetails(): void {
+    this._routerUtility(['user', this.userId], {});
   }
 }

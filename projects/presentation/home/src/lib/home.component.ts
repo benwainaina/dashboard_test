@@ -72,9 +72,6 @@ export class HomeComponent {
   }
 
   private _createUserListItems(usersList: Array<IUserData>): void {
-    if (!usersList) {
-      console.log('none', usersList);
-    }
     this.usersList = usersList.map((user) => ({
       componentInput: user,
       componentRef: UserCardComponent,
