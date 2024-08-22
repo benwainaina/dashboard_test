@@ -51,22 +51,32 @@
             </a>
           </div>
         </div>
-        <div *ngIf="peersList" class="wrapper__content__peers">
+        <div class="wrapper__content__peers">
           <div class="wrapper__content__peers__title poppins-bold">Peers</div>
-          <div class="wrapper__content__peers__content">
-            <app-list-display
-              [listItems]="peersList"
-              [isInfinite]="true"
-              [customStyles]="{ rowGap: 0 }"
-            />
-          </div>
-          <div class="wrapper__content__peers__footer">
-            <h3 class="poppins-bold">Hint</h3>
-            <span class="poppins-regular">
-              Try scrolling to the bottom of the peers list, you will see more
-              peers loaded.</span
-            >
-          </div>
+          <ng-container
+            *ngTemplateOutlet="
+              peersList.length === 0 ? noMorePeersTemplate : peersTemplate
+            "
+          ></ng-container>
+          <ng-template #noMorePeersTemplate>
+            <span class="poppins-regular"> No more peers to see here.</span>
+          </ng-template>
+          <ng-template #peersTemplate>
+            <div class="wrapper__content__peers__content">
+              <app-list-display
+                [listItems]="peersList"
+                [isInfinite]="true"
+                [customStyles]="{ rowGap: 0 }"
+              />
+            </div>
+            <div class="wrapper__content__peers__footer">
+              <h3 class="poppins-bold">Hint</h3>
+              <span class="poppins-regular">
+                Try scrolling to the bottom of the peers list, you will see more
+                peers loaded.</span
+              >
+            </div>
+          </ng-template>
         </div>
       </div>
     </ng-template>

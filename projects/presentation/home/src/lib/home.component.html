@@ -24,6 +24,20 @@
     </form>
   </div>
   <div class="wrapper__content">
-    <app-list-display [listItems]="usersList" [customStyles]="{}" />
+    <ng-container
+      *ngTemplateOutlet="
+        usersList.length === 0 ? pageHasNoUsersTemplate : pageHasUsersTemplate
+      "
+    ></ng-container>
+    <ng-template #pageHasNoUsersTemplate>
+      <div class="wrapper__content__no-users">
+        <span class="wrapper__content__no-users__instruction poppins-bold"
+          >Hmmm... this page has no users</span
+        >
+      </div>
+    </ng-template>
+    <ng-template #pageHasUsersTemplate>
+      <app-list-display [listItems]="usersList" [customStyles]="{}" />
+    </ng-template>
   </div>
 </div>

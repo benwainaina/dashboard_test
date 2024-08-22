@@ -21,11 +21,17 @@ import { actionGetUsers } from '../../../user/src/state_manager/actions';
 import { IUserData } from '../../../user/src/state_manager/interfaces';
 import { UserCardComponent } from '../../../user/src/lib/components/user-card/user-card.component';
 import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'lib-home',
   standalone: true,
-  imports: [PagesComponentComponent, ListDisplayComponent, ReactiveFormsModule],
+  imports: [
+    PagesComponentComponent,
+    ListDisplayComponent,
+    ReactiveFormsModule,
+    NgTemplateOutlet,
+  ],
   templateUrl: 'home.component.html',
   styleUrl: 'home.component.scss',
 })
