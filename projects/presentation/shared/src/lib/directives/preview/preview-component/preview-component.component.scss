@@ -1,6 +1,7 @@
 :host {
-  position: fixed;
-  z-index: 1000;
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
 }
 
 .wrapper {

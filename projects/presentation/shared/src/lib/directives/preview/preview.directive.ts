@@ -1,16 +1,6 @@
-import {
-  Directive,
-  ElementRef,
-  inject,
-  Input,
-  OnInit,
-  ViewContainerRef,
-} from '@angular/core';
+import { Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
 import { PreviewComponentComponent } from './preview-component/preview-component.component';
-import {
-  IPreviewPosition,
-  TPreviewPlacement,
-} from '../../state_manager/interfaces';
+import { IPreviewPosition } from '../../state_manager/interfaces';
 
 @Directive({
   selector: '[previewDirective]',
@@ -18,7 +8,6 @@ import {
 })
 export class PreviewDirective implements OnInit {
   private _hostElement: ElementRef<HTMLDivElement> = inject(ElementRef);
-  private _viewContainerRef: ViewContainerRef = inject(ViewContainerRef);
 
   @Input({ required: true }) public userId!: string;
   @Input({ required: true }) public previewOutlet!: any;
@@ -53,8 +42,10 @@ export class PreviewDirective implements OnInit {
       height: listHeight = 0,
       x: listStartX = 0,
       y: listStartY = 0,
-    } = this._hostElement.nativeElement.parentElement?.parentElement?.getBoundingClientRect() ||
-    {};
+    } = this._hostElement.nativeElement
+      .closest('app-list-display')
+      ?.parentElement?.getBoundingClientRect() || {};
+
     const listCenterX = listStartX + listWidth / 2;
     const listCenterY = listStartY + listHeight / 2;
     let placementPosition: IPreviewPosition = {
