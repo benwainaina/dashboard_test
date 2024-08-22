@@ -5,9 +5,10 @@
   margin: 24px 24px 0px;
   border-radius: 60px;
   align-items: center;
-  // padding: 12px;
   column-gap: 12px;
   min-width: 250px;
+  max-width: 250px;
+  cursor: pointer;
 
   &__avatar {
     width: 60px;
