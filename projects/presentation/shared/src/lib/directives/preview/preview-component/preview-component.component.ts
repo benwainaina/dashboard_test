@@ -98,8 +98,7 @@ export class PreviewComponentComponent implements AfterViewInit, OnInit {
   }
 
   private _placeInZoneC(cardCenterX: number, cardCenterY: number): void {
-    const { height: hostHeight, width: hostWidth } =
-      this._getHostElementDomRect();
+    const { width: hostWidth } = this._getHostElementDomRect();
     this._renderer2Utility(
       this._outlet.nativeElement,
       'left',
@@ -113,8 +112,6 @@ export class PreviewComponentComponent implements AfterViewInit, OnInit {
   }
 
   private _placeInZoneD(cardCenterX: number, cardCenterY: number): void {
-    const { height: hostHeight, width: hostWidth } =
-      this._getHostElementDomRect();
     this._renderer2Utility(
       this._outlet.nativeElement,
       'left',

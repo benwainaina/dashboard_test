@@ -2,10 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
   inject,
   OnInit,
-  ViewChild,
 } from '@angular/core';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
 import { queryRouterUtility } from '../../../shared/src/lib/utilities/queryRouter.utility';
