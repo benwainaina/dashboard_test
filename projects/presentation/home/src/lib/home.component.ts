@@ -14,7 +14,7 @@ import {
 import { selectUsersLists } from '../../../user/src/state_manager/selectors';
 import { actionGetUsers } from '../../../user/src/state_manager/actions';
 import { IUserData } from '../../../user/src/state_manager/interfaces';
-import { UserCardComponent } from '../../../user/src/lib/components/user-card/user-card.component';
+import { UserCardComponent } from '../../../user/src/lib/components/cards/user-card/user-card.component';
 import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
 import { NgTemplateOutlet } from '@angular/common';
 
