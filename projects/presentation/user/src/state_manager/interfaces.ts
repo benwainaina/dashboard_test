@@ -69,4 +69,9 @@ export interface IUserSlice {
    * last fetched at
    */
   ttlLastUserFetch?: Date;
+
+  /**
+   * active user data
+   */
+  activeUserData?: IUserData;
 }

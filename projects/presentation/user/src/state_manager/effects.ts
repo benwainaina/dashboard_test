@@ -29,10 +29,12 @@ export class UserEffect {
       concatLatestFrom(() => this._selectDataUtility(selectCurrentPage)),
       mergeMap((_, currentPage) =>
         this._apiService.get('users', `page=${currentPage}`).pipe(
-          map((res) =>
+          map(({ data: rawUsersData, total_pages: pages, per_page: perPage }) =>
             UserActions.actionSetUsers({
-              users: mapUserData(res.data),
-              pageMeta: { pages: res.total_pages, perPage: res.per_page },
+              users: rawUsersData.map((rawUserData: any) =>
+                mapUserData(rawUserData)
+              ),
+              pageMeta: { pages, perPage },
             })
           ),
           catchError((err) =>
@@ -59,7 +61,9 @@ export class UserEffect {
       mergeMap((action) =>
         this._apiService.get(`users/${action.userId}`, '').pipe(
           map(({ data: userData }) =>
-            UserActions.actionSetUserDetails({ userData })
+            UserActions.actionSetUserDetails({
+              userData: mapUserData(userData),
+            })
           ),
           catchError((err) =>
             of(
@@ -77,11 +81,10 @@ export class UserEffect {
   );
 }
 
-const mapUserData = (users: Array<any>): Array<IUserData> =>
-  users.map((user) => ({
-    image: user.avatar,
-    email: user.email,
-    firstName: user.first_name,
-    lastName: user.last_name,
-    id: user.id,
-  }));
+const mapUserData = (rawUserData: any): IUserData => ({
+  image: rawUserData.avatar,
+  email: rawUserData.email,
+  firstName: rawUserData.first_name,
+  lastName: rawUserData.last_name,
+  id: rawUserData.id,
+});

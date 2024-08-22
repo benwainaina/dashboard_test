@@ -1,7 +1,22 @@
-<div class="wrapper">
-  <ng-container *ngFor="let item of listItems">
+<div #wrapperElementRef class="wrapper">
+  <div
+    *ngFor="let item of listItems; let idx = index"
+    [ngClass]="{ 'is-last-item': idx === listItems.length - 1 }"
+    class="wrapper__item"
+  >
     <ng-container
       *ngComponentOutlet="item.componentRef; inputs: item.componentInput"
     ></ng-container>
+  </div>
+
+  <ng-container *ngIf="isInfinite">
+    <div
+      *ngIf="!showLoading"
+      class="wrapper__infinite-trigger"
+      #infiniteTriggerElementRef
+    ></div>
+    <div *ngIf="showLoading" class="wrapper__infinite-loader poppins-bold">
+      Loading...
+    </div>
   </ng-container>
 </div>

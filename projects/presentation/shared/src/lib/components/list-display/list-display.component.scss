@@ -2,8 +2,22 @@
   display: flex;
   flex-wrap: wrap;
   gap: 44px;
+  height: 400px;
+
+  &__item {
+    width: auto;
+  }
 
   @media only screen and (max-width: 1218px) {
+    justify-content: center;
+  }
+
+  &__infinite-trigger,
+  &__infinite-loader {
+    width: 100%;
+    padding: 12px 0px;
+    display: flex;
+    align-items: center;
     justify-content: center;
   }
 }

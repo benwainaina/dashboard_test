@@ -1,0 +1,128 @@
+.wrapper {
+  height: 100%;
+  width: 100%;
+
+  &__loader {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-areas:
+      ". header header header header header ."
+      ". body body body . peers ."
+      ". body body body . peers ."
+      ". body body body . peers ."
+      ". body body body . peers .";
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    height: 100%;
+    width: 100%;
+
+    @media only screen and (max-width: 1024px) {
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-areas:
+        ". header header header header header"
+        ". body body body body ."
+        ". body body body body ."
+        ". body body body body ."
+        ". body body body body .";
+      width: 100%;
+    }
+
+    @media only screen and (max-width: 534px) {
+      grid-template-columns: repeat(1, 1fr);
+      grid-template-rows: repeat(12, 1fr);
+      grid-template-areas:
+        "header"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body"
+        "body";
+    }
+
+    &__header {
+      grid-area: header;
+      align-items: center;
+      display: flex;
+
+      @media only screen and (max-width: 1024px) {
+        padding: 24px 14px;
+
+        &__go-back {
+          svg {
+            width: 28px;
+            height: 28px;
+          }
+        }
+      }
+    }
+
+    &__body {
+      grid-area: body;
+      display: flex;
+      flex-direction: column;
+
+      @media only screen and (max-width: 1024px) {
+        justify-content: center;
+      }
+
+      @media only screen and (max-width: 534px) {
+        padding: 24px;
+      }
+
+      &__avatar {
+        flex: 2;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 24px;
+      }
+
+      &__details {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        row-gap: 12px;
+        align-items: center;
+        margin-top: 24px;
+
+        &__name {
+          font-size: 36px;
+        }
+
+        &__email {
+          color: #07abfd;
+          font-size: 32px;
+        }
+      }
+    }
+
+    &__peers {
+      grid-area: peers;
+
+      @media only screen and (max-width: 1024px) {
+        display: none;
+      }
+
+      &__title {
+        font-size: 32px;
+      }
+
+      &__content {
+        overflow: auto;
+      }
+    }
+  }
+}

@@ -22,6 +22,14 @@ export const selectUsersLists = createSelector(
 );
 
 /**
+ * select status for fetching users list
+ */
+export const selectIsFetchingUsers = createSelector(
+  userSlice,
+  (slice) => slice.isFetchingUsers
+);
+
+/**
  * const page slice
  */
 const selectPageSlice = createSelector(userSlice, (slice) => slice.pagination);
@@ -41,4 +49,12 @@ export const selectPreviewUserData = createSelector(
   selectUsersLists,
   (userList: Array<IUserData>, props: IDynamicObject) =>
     userList.find((user) => user.id.toString() === props['userId']?.toString())
+);
+
+/**
+ * select retrieved user data
+ */
+export const selectRetrievedUserData = createSelector(
+  userSlice,
+  (slice) => slice.activeUserData
 );

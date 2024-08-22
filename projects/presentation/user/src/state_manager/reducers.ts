@@ -28,13 +28,6 @@ export const userReducer = createReducer(
   on(Actions.actionSetUserDetails, (state, action) => ({
     ...state,
     isFetchingUserData: false,
-    users: [
-      ...state.users.map((user) => {
-        if (user.id === action.userData.id) {
-          user = action.userData;
-        }
-        return user;
-      }),
-    ],
+    activeUserData: action.userData,
   }))
 );
