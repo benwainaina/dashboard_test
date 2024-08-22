@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { APIService } from '../../../shared/src/lib/services/api.service';
 import * as ActionNames from './actionNames';
 import * as UserActions from './actions';
@@ -19,7 +18,6 @@ import { IUserData } from './interfaces';
   providedIn: 'root',
 })
 export class UserEffect {
-  private _store: Store = inject(Store);
   private _actions: Actions = inject(Actions);
   private _apiService: APIService = inject(APIService);
   private _selectDataUtility = selectDataUtility();

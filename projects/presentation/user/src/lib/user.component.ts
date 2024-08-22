@@ -87,12 +87,6 @@ export class UserComponent implements OnInit {
             componentInput: user,
             componentRef: MiniUserCardComponent,
           }));
-          // usersList.map((user) => {
-          //   this.peersList.push({
-          //     componentInput: user,
-          //     componentRef: MiniUserCardComponent,
-          //   });
-          // });
           this._changeDetectorRef.detectChanges();
         },
       });
