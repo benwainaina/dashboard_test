@@ -42,6 +42,8 @@ export interface IDynamicObject {
 
 export interface ISharedSlice {
   /**
+   * TODO: If time allows, this can be added, like a nice toaster
+   *
    * whether there is any notification information
    */
   notification?: INotificationData;
