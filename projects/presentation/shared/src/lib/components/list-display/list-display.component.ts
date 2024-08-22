@@ -5,7 +5,6 @@ import {
   ElementRef,
   inject,
   Input,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import {
@@ -18,13 +17,17 @@ import {
 import { UserCardComponent } from '../../../../../user/src/lib/components/user-card/user-card.component';
 import { IListDisplayItem } from '../../state_manager/interfaces';
 import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
-import { actionGetUsers } from '../../../../../user/src/state_manager/actions';
+import {
+  actionGetUsers,
+  actionSetCurrentPage,
+} from '../../../../../user/src/state_manager/actions';
 import { selectDataUtility } from '../../utilities/selectData.utility';
 import {
+  selectCurrentPage,
   selectIsFetchingUserData,
   selectIsFetchingUsers,
 } from '../../../../../user/src/state_manager/selectors';
-import { filter, firstValueFrom, Observable, take } from 'rxjs';
+import { filter, firstValueFrom, take } from 'rxjs';
 
 @Component({
   selector: 'app-list-display',
@@ -49,7 +52,9 @@ export class ListDisplayComponent {
   constructor() {}
 
   ngOnInit(): void {
-    this._listenForPostDataFetch();
+    if (this.isInfinite) {
+      this._listenForPostDataFetch();
+    }
   }
 
   private _listenForPostDataFetch(): void {
@@ -86,12 +91,18 @@ export class ListDisplayComponent {
 
   private _observeIntersection(): void {
     const observer = new IntersectionObserver(
-      (entries) => {
+      async (entries) => {
         const [{ isIntersecting }] = entries;
         if (isIntersecting) {
+          const currentPage = await firstValueFrom(
+            this._selectDataUtility(selectCurrentPage)
+          );
           this.showLoading = true;
           this._commonChangeDetector();
           setTimeout(() => {
+            this._dispatchActionUtility(actionSetCurrentPage, {
+              page: currentPage + 1,
+            });
             this._dispatchActionUtility(actionGetUsers);
             this._selectDataUtility(selectIsFetchingUserData)
               .pipe(

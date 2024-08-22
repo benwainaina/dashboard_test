@@ -43,6 +43,14 @@ export const selectCurrentPage = createSelector(
 );
 
 /**
+ * total pages count
+ */
+export const selectTotalPages = createSelector(
+  selectPageSlice,
+  (slice) => slice.pages
+);
+
+/**
  * select preview user data
  */
 export const selectPreviewUserData = createSelector(

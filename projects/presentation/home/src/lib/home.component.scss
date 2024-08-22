@@ -3,21 +3,21 @@
   grid-template-areas:
     ". tips tips search search search search"
     ". tips tips content content content content"
-    ". settings settings content content content content"
+    ". pages pages content content content content"
     ". pages pages content content content content"
     ". pages pages content content content content";
   width: 100%;
   height: 100%;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
-  gap: 20px;
+  gap: 60px;
 
   @media only screen and (max-width: 1024px) {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
       "tips tips search search search search"
       "tips tips content content content content"
-      "settings settings content content content content"
+      "pages pages content content content content"
       "pages pages content content content content"
       "pages pages content content content content";
     width: 100%;
@@ -55,33 +55,6 @@
         display: flex;
         flex-direction: column;
         row-gap: 12px;
-      }
-    }
-  }
-
-  &__settings {
-    padding-left: 36px;
-    grid-area: settings;
-    @extend .hide-on-small-devices;
-    display: flex;
-    flex-direction: column;
-    row-gap: 24px;
-    justify-content: center;
-
-    &__setting {
-      display: flex;
-      column-gap: 26px;
-      align-items: center;
-
-      &__toggle {
-        width: 32px;
-        height: 32px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      &__label {
       }
     }
   }

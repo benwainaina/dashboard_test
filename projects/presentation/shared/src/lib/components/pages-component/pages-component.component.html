@@ -1,9 +1,14 @@
 <div class="wrapper">
   <div class="wrapper__title poppins-bold">Pages</div>
   <div class="wrapper__navigable-pages">
-    <div class="wrapper__navigable-pages__go-to-first poppins-bold">First</div>
+    <div
+      class="wrapper__navigable-pages__go-to-first poppins-bold"
+      (click)="goToPage(1)"
+    >
+      First
+    </div>
     <div class="wrapper__navigable-pages__indicator">
-      <ng-container>
+      <div (click)="goToPrevious()">
         <svg
           width="12"
           height="22"
@@ -16,12 +21,12 @@
             fill="#5F6368"
           />
         </svg>
-      </ng-container>
+      </div>
 
       <div class="wrapper__navigable-pages__indicator__page-num poppins-bold">
-        1
+        {{ (currentPage$ | async) || 0 + 1 }}
       </div>
-      <ng-container>
+      <div (click)="goToNext()">
         <svg
           width="12"
           height="22"
@@ -34,19 +39,30 @@
             fill="#5F6368"
           />
         </svg>
-      </ng-container>
+      </div>
     </div>
-    <div class="wrapper__navigable-pages__go-to-last poppins-bold">Last</div>
+    <div
+      class="wrapper__navigable-pages__go-to-last poppins-bold"
+      (click)="goToLast()"
+    >
+      Last
+    </div>
   </div>
   <div class="wrapper__skip-to-page">
-    <!-- <div class="wrapper__skip-to-page__input">
-      <input type="text" />
-    </div> -->
     <input
       class="wrapper__skip-to-page__input poppins-regular"
       type="number"
       placeholder="Skip to page"
+      [(ngModel)]="skipToPage"
+      max="2"
+      min="1"
     />
-    <div class="wrapper__skip-to-page__action poppins-bold">Go</div>
+    <button
+      class="wrapper__skip-to-page__action poppins-bold"
+      [disabled]="!skipToPage || skipToPage > ((allPagesCount$ | async) || 0)"
+      (click)="goToPage(skipToPage)"
+    >
+      Go
+    </button>
   </div>
 </div>

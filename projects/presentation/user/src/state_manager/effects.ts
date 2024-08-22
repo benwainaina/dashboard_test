@@ -27,7 +27,7 @@ export class UserEffect {
     this._actions.pipe(
       ofType(ActionNames.actionNameGetUsers),
       concatLatestFrom(() => this._selectDataUtility(selectCurrentPage)),
-      mergeMap((_, currentPage) =>
+      mergeMap(([_, currentPage]) =>
         this._apiService.get('users', `page=${currentPage}`).pipe(
           map(({ data: rawUsersData, total_pages: pages, per_page: perPage }) =>
             UserActions.actionSetUsers({

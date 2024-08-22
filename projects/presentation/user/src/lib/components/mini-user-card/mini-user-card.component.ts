@@ -18,4 +18,8 @@ export class MiniUserCardComponent {
   @Input({ required: true }) public image!: string;
   @ViewChild('previewOutlet', { read: ViewContainerRef, static: true })
   public previewOutletRef!: ViewContainerRef;
+
+  ngOnInit(): void {
+    console.log('id', this.id);
+  }
 }

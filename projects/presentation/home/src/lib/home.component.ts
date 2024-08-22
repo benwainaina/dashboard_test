@@ -39,7 +39,7 @@ export class HomeComponent {
   });
 
   ngOnInit(): void {
-    this._dispatchActionUtility(actionGetUsers, { pageNumber: 1 });
+    this._dispatchActionUtility(actionGetUsers);
     this._listenForUserList();
     this._listenFormFormSearchField();
   }

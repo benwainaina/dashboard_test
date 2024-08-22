@@ -15,12 +15,17 @@ export const userReducer = createReducer(
     ...state,
     isFetchingUsers: true,
   })),
-  on(Actions.actionSetUsers, (state, action) => ({
-    ...state,
-    isFetchingUsers: false,
-    users: action.users,
-    page: action.pageMeta,
-  })),
+  on(Actions.actionSetUsers, (state, action) => {
+    return {
+      ...state,
+      isFetchingUsers: false,
+      users: action.users,
+      pagination: {
+        ...state.pagination,
+        ...action.pageMeta,
+      },
+    };
+  }),
   on(Actions.actionGetUserDetails, (state) => ({
     ...state,
     isFetchingUserData: true,
@@ -29,5 +34,14 @@ export const userReducer = createReducer(
     ...state,
     isFetchingUserData: false,
     activeUserData: action.userData,
-  }))
+  })),
+  on(Actions.actionSetCurrentPage, (state, action) => {
+    return {
+      ...state,
+      pagination: {
+        ...state.pagination,
+        currentPage: action.page,
+      },
+    };
+  })
 );

@@ -21,3 +21,10 @@ export const actionSetUsers = createAction(
   ActionNames.actionNameStoreUsers,
   props<{ users: Array<IUserData>; pageMeta: IPageMeta }>()
 );
+
+export const actionSetCurrentPage = createAction(
+  ActionNames.actionNameSetCurrentPage,
+  props<{
+    page: number;
+  }>()
+);
