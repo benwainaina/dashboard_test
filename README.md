@@ -1,27 +1,29 @@
-# DashboardTest
+<h1>
+A User Dashboard
+</h1>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+<h3>Stack</h3>
+<ol>
+<li>Angular.</li>
+<li>State Management: NgRx.</li>
+<li>SCSS with BEM (<a>https://getbem.com/</a>) for styling </li>
+</ol>
 
-## Development server
+<h3>Instructions</h3>
+<ol>
+<li>Simply install the dependencies by running <b>npm i.</b></li>
+<li>You can now run the project with <b>npm run start.</b></li>
+<li>Now navigate to  <a>http://localhost:4200/</a>  on your browser.</li>
+</ol>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<h3>Explanation</h3>
+<ol>
+<li>The whole project is build around NgRx for both <b>state management</b> and <b>caching data.</b></li> I favored this approach for caching, because NgRx can be combined with <b>ngrx-localstorage</b> to make caching even more robust, over using <b>HTTP Interceptors</b> (totally my opinion)
+<li>Use of <b>directives</b> to preview content on hover. </li>
+<li><b>Dynamic</b> component rendering for <b>UI re-usability.</b> </li>
+<li>Use of <b>utility</b> functions for <b>Logic re-usability.</b> </li>
+</ol>
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+<h3>Conclusion</h3>
+<p>Please let me know if you have any questions!</p>
+<span>Thanks!</span>
