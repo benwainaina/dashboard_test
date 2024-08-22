@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { PagesComponentComponent } from '../../../shared/src/lib/components/pages-component/pages-component.component';
 import { dispatchActionUtility } from '../../../shared/src/lib/utilities/dispatchAction.utility';
 import { ListDisplayComponent } from '../../../shared/src/lib/components/list-display/list-display.component';
