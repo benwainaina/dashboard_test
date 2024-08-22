@@ -12,8 +12,4 @@ export class APIService {
   public get(path: string, params: any): Observable<any> {
     return this._httpClient.get(`${this._rootApiPath}/${path}?${params}`);
   }
-
-  public post(path: string, payload: any): Observable<any> {
-    return this._httpClient.post(`${this._rootApiPath}/${path}`, payload);
-  }
 }

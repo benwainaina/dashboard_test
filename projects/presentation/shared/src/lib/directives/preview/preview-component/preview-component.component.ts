@@ -1,17 +1,12 @@
 import {
   AfterViewInit,
-  ChangeDetectorRef,
   Component,
   ElementRef,
-  inject,
   Input,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import {
-  IPreviewPosition,
-  TPreviewPlacement,
-} from '../../../state_manager/interfaces';
+import { IPreviewPosition } from '../../../state_manager/interfaces';
 import { renderer2Utility } from '../../../utilities/renderer2.utility';
 import { Observable } from 'rxjs';
 import { IUserData } from '../../../../../../user/src/state_manager/interfaces';

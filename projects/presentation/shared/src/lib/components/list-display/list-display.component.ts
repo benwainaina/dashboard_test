@@ -14,7 +14,6 @@ import {
   NgFor,
   NgIf,
 } from '@angular/common';
-import { UserCardComponent } from '../../../../../user/src/lib/components/user-card/user-card.component';
 import {
   IDynamicObject,
   IListDisplayItem,
