@@ -1,10 +1,12 @@
+import { IDynamicObject } from '../../../shared/src/lib/state_manager/interfaces';
+
 export const UserSliceName = 'user';
 
 export interface IPageMeta {
   /**
    * current page the user is at
    */
-  currentPage?: number;
+  currentPage: number;
 
   /**
    * total pages
@@ -42,6 +44,11 @@ export interface IUserData {
    * image for user
    */
   image: string;
+
+  /**
+   * the page to which this user belongs at
+   */
+  pageNum: number;
 }
 
 export interface IUserSlice {
@@ -69,6 +76,19 @@ export interface IUserSlice {
    * last fetched at
    */
   ttlLastUserFetch?: Date;
+
+  /**
+   * a hard coded value for after how ttl should be invalidated
+   * and data on store be used
+   *
+   * NB: this can be combined with ngrx local storage to be more robust
+   */
+  ttlTimeOutInSeconds: number;
+
+  /**
+   * list of pages which have already been fetched
+   */
+  fetchedPages: IDynamicObject;
 
   /**
    * active user data

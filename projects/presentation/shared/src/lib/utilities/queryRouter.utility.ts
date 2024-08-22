@@ -12,14 +12,4 @@ export const queryRouterUtility = () => {
         next: (params) => subscriber.next(params[paramId]),
       });
     });
-
-  //   return (paramId: string) => {
-  //     activatedRoute.params.subscribe({
-  //       next: (params) => {
-  //         console.log('params', params);
-  //       },
-  //     });
-
-  //     return activatedRoute.snapshot.params['id'];
-  //   };
 };

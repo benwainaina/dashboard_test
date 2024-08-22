@@ -17,6 +17,7 @@ export class UserCardComponent {
   @Input({ required: true }) public firstName!: string;
   @Input({ required: true }) public lastName!: string;
   @Input({ required: true }) public image!: string;
+  @Input({ required: true }) public pageNum!: string;
   @ViewChild('previewOutlet', { read: ViewContainerRef, static: true })
   public previewOutletRef!: ViewContainerRef;
 }

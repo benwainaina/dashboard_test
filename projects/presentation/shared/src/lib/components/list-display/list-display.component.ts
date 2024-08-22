@@ -15,7 +15,10 @@ import {
   NgIf,
 } from '@angular/common';
 import { UserCardComponent } from '../../../../../user/src/lib/components/user-card/user-card.component';
-import { IListDisplayItem } from '../../state_manager/interfaces';
+import {
+  IDynamicObject,
+  IListDisplayItem,
+} from '../../state_manager/interfaces';
 import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
 import {
   actionGetUsers,
@@ -28,6 +31,7 @@ import {
   selectIsFetchingUsers,
 } from '../../../../../user/src/state_manager/selectors';
 import { filter, firstValueFrom, take } from 'rxjs';
+import { renderer2Utility } from '../../utilities/renderer2.utility';
 
 @Component({
   selector: 'app-list-display',
@@ -39,6 +43,7 @@ import { filter, firstValueFrom, take } from 'rxjs';
 })
 export class ListDisplayComponent {
   @Input({ required: true }) public listItems: Array<IListDisplayItem> = [];
+  @Input({}) public customStyles: IDynamicObject = {};
   @Input({}) public isInfinite: boolean = false;
   @ViewChild('infiniteTriggerElementRef', { static: false })
   private _infiniteTriggerElementRef!: ElementRef;
@@ -47,13 +52,27 @@ export class ListDisplayComponent {
   private _selectDataUtility = selectDataUtility();
   private _changeDetectorRef: ChangeDetectorRef = inject(ChangeDetectorRef);
   private _dispatchActionUtility = dispatchActionUtility();
+  private _renderer2Utility = renderer2Utility();
+
   public showLoading: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {
     if (this.isInfinite) {
+      this._invokeInfiniteScroll();
       this._listenForPostDataFetch();
+    }
+    this._applyCustomStyles();
+  }
+
+  private _applyCustomStyles(): void {
+    for (const key in this.customStyles) {
+      this._renderer2Utility(
+        this._wrapperElementRef.nativeElement,
+        key,
+        this.customStyles[key]
+      );
     }
   }
 
@@ -61,8 +80,7 @@ export class ListDisplayComponent {
     this._selectDataUtility(selectIsFetchingUsers)
       .pipe(filter((status) => status === false))
       .subscribe({
-        next: (status) => {
-          this._invokeInfiniteScroll();
+        next: () => {
           this.showLoading = false;
           this._commonChangeDetector();
         },
@@ -120,7 +138,7 @@ export class ListDisplayComponent {
         }
       },
       {
-        threshold: 1,
+        threshold: 0.1,
       }
     );
     observer.observe(this._infiniteTriggerElementRef?.nativeElement);

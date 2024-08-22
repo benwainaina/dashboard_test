@@ -19,7 +19,7 @@ export const actionGetUsers = createAction(
 
 export const actionSetUsers = createAction(
   ActionNames.actionNameStoreUsers,
-  props<{ users: Array<IUserData>; pageMeta: IPageMeta }>()
+  props<{ users: Array<IUserData>; pageMeta?: IPageMeta; persisted: boolean }>()
 );
 
 export const actionSetCurrentPage = createAction(

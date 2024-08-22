@@ -54,7 +54,11 @@
         <div *ngIf="peersList" class="wrapper__content__peers">
           <div class="wrapper__content__peers__title poppins-bold">Peers</div>
           <div class="wrapper__content__peers__content">
-            <app-list-display [listItems]="peersList" [isInfinite]="true" />
+            <app-list-display
+              [listItems]="peersList"
+              [isInfinite]="true"
+              [customStyles]="{ rowGap: 0 }"
+            />
           </div>
         </div>
       </div>

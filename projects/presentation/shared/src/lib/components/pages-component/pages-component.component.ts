@@ -58,7 +58,6 @@ export class PagesComponentComponent {
 
   public async goToLast() {
     const allPages = await this._getTotalPages();
-    console.log('allPages', allPages);
     this.goToPage(allPages);
   }
 

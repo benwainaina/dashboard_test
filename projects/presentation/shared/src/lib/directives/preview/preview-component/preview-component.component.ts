@@ -147,7 +147,6 @@ export class PreviewComponentComponent implements AfterViewInit, OnInit {
   }
 
   public viewDetails(): void {
-    console.log('userId', this.userId);
     this._routerUtility(['user', this.userId], {});
   }
 }

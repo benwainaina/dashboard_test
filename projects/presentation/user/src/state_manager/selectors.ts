@@ -14,22 +14,6 @@ export const selectIsFetchingUserData = createSelector(
 );
 
 /**
- * select the users in the application
- */
-export const selectUsersLists = createSelector(
-  userSlice,
-  (slice) => slice.users
-);
-
-/**
- * select status for fetching users list
- */
-export const selectIsFetchingUsers = createSelector(
-  userSlice,
-  (slice) => slice.isFetchingUsers
-);
-
-/**
  * const page slice
  */
 const selectPageSlice = createSelector(userSlice, (slice) => slice.pagination);
@@ -51,6 +35,24 @@ export const selectTotalPages = createSelector(
 );
 
 /**
+ * select the users in the application
+ */
+export const selectUsersLists = createSelector(
+  userSlice,
+  selectCurrentPage,
+  (slice, currentPage) =>
+    slice.users.filter((user) => user.pageNum === currentPage)
+);
+
+/**
+ * select status for fetching users list
+ */
+export const selectIsFetchingUsers = createSelector(
+  userSlice,
+  (slice) => slice.isFetchingUsers
+);
+
+/**
  * select preview user data
  */
 export const selectPreviewUserData = createSelector(
@@ -66,3 +68,26 @@ export const selectRetrievedUserData = createSelector(
   userSlice,
   (slice) => slice.activeUserData
 );
+
+/**
+ * select whether fetch can be done, based on last ttl
+ */
+export const selectTTLIsExpired = createSelector(userSlice, (slice) => {
+  /**
+   * fetch from server if last time of fetching was N seconds ago
+   */
+
+  if (
+    slice.pagination.currentPage &&
+    slice.fetchedPages[slice.pagination.currentPage.toString()]
+  ) {
+    const timeSinceLastFetch =
+      (new Date().getTime() - (slice.ttlLastUserFetch?.getTime() || 0)) / 1000;
+
+    if (timeSinceLastFetch > slice.ttlTimeOutInSeconds) {
+      return true;
+    }
+    return false;
+  }
+  return true;
+});

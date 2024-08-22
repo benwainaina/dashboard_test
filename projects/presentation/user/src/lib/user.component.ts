@@ -75,12 +75,16 @@ export class UserComponent implements OnInit {
       .pipe(takeUntil(this._onDestroy$))
       .subscribe({
         next: (usersList: Array<IUserData>) => {
-          usersList.map((user) => {
-            this.peersList.push({
-              componentInput: user,
-              componentRef: MiniUserCardComponent,
-            });
-          });
+          this.peersList = usersList.map((user) => ({
+            componentInput: user,
+            componentRef: MiniUserCardComponent,
+          }));
+          // usersList.map((user) => {
+          //   this.peersList.push({
+          //     componentInput: user,
+          //     componentRef: MiniUserCardComponent,
+          //   });
+          // });
           this._changeDetectorRef.detectChanges();
         },
       });

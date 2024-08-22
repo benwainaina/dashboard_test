@@ -5,8 +5,10 @@ import * as Actions from './actions';
 const initialState: IUserSlice = {
   isFetchingUserData: false,
   users: [],
-  pagination: {},
+  pagination: { currentPage: 1 },
   isFetchingUsers: false,
+  ttlTimeOutInSeconds: 2,
+  fetchedPages: {},
 };
 
 export const userReducer = createReducer(
@@ -19,11 +21,23 @@ export const userReducer = createReducer(
     return {
       ...state,
       isFetchingUsers: false,
-      users: action.users,
+      users: [
+        ...state.users.filter(
+          (user) => user.pageNum !== state.pagination.currentPage
+        ),
+        ...action.users,
+      ],
       pagination: {
         ...state.pagination,
         ...action.pageMeta,
       },
+      ttlLastUserFetch: !action.persisted ? new Date() : state.ttlLastUserFetch,
+      fetchedPages: action.pageMeta?.currentPage
+        ? {
+            ...state.fetchedPages,
+            [action.pageMeta.currentPage.toString()]: true,
+          }
+        : state.fetchedPages,
     };
   }),
   on(Actions.actionGetUserDetails, (state) => ({

@@ -5,7 +5,11 @@ import { APIService } from '../../../shared/src/lib/services/api.service';
 import * as ActionNames from './actionNames';
 import * as UserActions from './actions';
 import { concatLatestFrom } from '@ngrx/operators';
-import { selectCurrentPage } from './selectors';
+import {
+  selectCurrentPage,
+  selectTTLIsExpired,
+  selectUsersLists,
+} from './selectors';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { actionSetNotificationData } from '../../../shared/src/lib/state_manager/actions';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
@@ -26,28 +30,45 @@ export class UserEffect {
   getUsers$ = createEffect(() =>
     this._actions.pipe(
       ofType(ActionNames.actionNameGetUsers),
-      concatLatestFrom(() => this._selectDataUtility(selectCurrentPage)),
-      mergeMap(([_, currentPage]) =>
-        this._apiService.get('users', `page=${currentPage}`).pipe(
-          map(({ data: rawUsersData, total_pages: pages, per_page: perPage }) =>
-            UserActions.actionSetUsers({
-              users: rawUsersData.map((rawUserData: any) =>
-                mapUserData(rawUserData)
-              ),
-              pageMeta: { pages, perPage },
-            })
-          ),
-          catchError((err) =>
-            of(
-              actionSetNotificationData({
-                payload: {
-                  type: 'error',
-                  message: 'Could not fetch users at the moment',
-                },
+      concatLatestFrom(() => [
+        this._selectDataUtility(selectCurrentPage),
+        this._selectDataUtility(selectTTLIsExpired),
+        this._selectDataUtility(selectUsersLists),
+      ]),
+      mergeMap(([_, currentPage, ttlIsExpired, existingUserList]) =>
+        !ttlIsExpired
+          ? of(
+              UserActions.actionSetUsers({
+                users: existingUserList,
+                persisted: true,
               })
             )
-          )
-        )
+          : this._apiService.get('users', `page=${currentPage}`).pipe(
+              map(
+                ({
+                  data: rawUsersData,
+                  total_pages: pages,
+                  per_page: perPage,
+                }) =>
+                  UserActions.actionSetUsers({
+                    users: rawUsersData.map((rawUserData: any) =>
+                      mapUserData(rawUserData, currentPage)
+                    ),
+                    pageMeta: { pages, perPage, currentPage },
+                    persisted: false,
+                  })
+              ),
+              catchError((err) =>
+                of(
+                  actionSetNotificationData({
+                    payload: {
+                      type: 'error',
+                      message: 'Could not fetch users at the moment',
+                    },
+                  })
+                )
+              )
+            )
       )
     )
   );
@@ -62,7 +83,7 @@ export class UserEffect {
         this._apiService.get(`users/${action.userId}`, '').pipe(
           map(({ data: userData }) =>
             UserActions.actionSetUserDetails({
-              userData: mapUserData(userData),
+              userData: mapUserData(userData, 0),
             })
           ),
           catchError((err) =>
@@ -81,10 +102,11 @@ export class UserEffect {
   );
 }
 
-const mapUserData = (rawUserData: any): IUserData => ({
+const mapUserData = (rawUserData: any, pageNum: number): IUserData => ({
   image: rawUserData.avatar,
   email: rawUserData.email,
   firstName: rawUserData.first_name,
   lastName: rawUserData.last_name,
   id: rawUserData.id,
+  pageNum,
 });
