@@ -9,7 +9,7 @@ export const actionGetUserDetails = createAction(
 
 export const actionSetUserDetails = createAction(
   ActionNames.actionNameStoreUserDetails,
-  props<{ userData: IUserData }>()
+  props<{ userData?: IUserData }>()
 );
 
 export const actionGetUsers = createAction(

@@ -4,8 +4,10 @@
   [previewOutlet]="previewOutletRef"
   class="wrapper"
 >
-  <div #previewOutlet></div>
-  <div class="wrapper__label poppins-bold">{{ firstName }}</div>
+  <ng-template class="wrapper__preview" #previewOutlet></ng-template>
+  <a [routerLink]="['/user', id]" class="wrapper__label poppins-bold">{{
+    firstName
+  }}</a>
   <div
     class="wrapper__image"
     [ngStyle]="{ 'background-image': 'url(' + image + ') ' }"

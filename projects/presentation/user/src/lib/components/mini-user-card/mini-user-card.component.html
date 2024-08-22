@@ -10,10 +10,10 @@
       'background-image': 'url(' + image + ')'
     }"
   ></div>
-  <div class="wrapper__details">
+  <a class="wrapper__details" [routerLink]="['/user', id]">
     <div class="wrapper__details__name poppins-bold">
       {{ firstName }} {{ lastName }}
     </div>
-  </div>
-  <div #previewOutlet></div>
+  </a>
+  <ng-template #previewOutlet></ng-template>
 </div>

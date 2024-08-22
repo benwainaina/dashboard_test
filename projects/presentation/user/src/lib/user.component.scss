@@ -8,6 +8,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+
+    a {
+      text-decoration: none;
+      color: #07abfd;
+    }
   }
 
   &__content {

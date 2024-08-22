@@ -87,14 +87,7 @@ export class UserEffect {
             })
           ),
           catchError((err) =>
-            of(
-              actionSetNotificationData({
-                payload: {
-                  type: 'error',
-                  message: 'Could not fetch details at the moment',
-                },
-              })
-            )
+            of(UserActions.actionSetUserDetails({ userData: undefined }))
           )
         )
       )

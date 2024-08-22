@@ -23,11 +23,19 @@ import { IUserData } from '../state_manager/interfaces';
 import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
 import { MiniUserCardComponent } from './components/mini-user-card/mini-user-card.component';
 import { ListDisplayComponent } from '../../../shared/src/lib/components/list-display/list-display.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'lib-user',
   standalone: true,
-  imports: [NgTemplateOutlet, AsyncPipe, NgStyle, ListDisplayComponent, NgIf],
+  imports: [
+    NgTemplateOutlet,
+    AsyncPipe,
+    NgStyle,
+    ListDisplayComponent,
+    NgIf,
+    RouterLink,
+  ],
   templateUrl: 'user.component.html',
   styleUrl: 'user.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

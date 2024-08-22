@@ -3,11 +3,13 @@ import { IUserData } from '../../../state_manager/interfaces';
 import { NgStyle } from '@angular/common';
 import { PreviewDirective } from '../../../../../shared/src/lib/directives/preview/preview.directive';
 import { PreviewComponentComponent } from '../../../../../shared/src/lib/directives/preview/preview-component/preview-component.component';
+import { RouterLink } from '@angular/router';
+import { routerUtility } from '../../../../../shared/src/lib/utilities/router.utility';
 
 @Component({
   selector: 'app-user-card',
   standalone: true,
-  imports: [NgStyle, PreviewDirective, PreviewComponentComponent],
+  imports: [NgStyle, PreviewDirective, PreviewComponentComponent, RouterLink],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
 })
