@@ -9,7 +9,7 @@ import {
   selectTTLIsExpired,
   selectUsersLists,
 } from './selectors';
-import { catchError, map, mergeMap, of, tap } from 'rxjs';
+import { catchError, map, mergeMap, of } from 'rxjs';
 import { actionSetNotificationData } from '../../../shared/src/lib/state_manager/actions';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
 import { IUserData } from './interfaces';

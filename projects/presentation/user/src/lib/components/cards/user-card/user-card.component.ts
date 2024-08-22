@@ -1,10 +1,8 @@
-import { Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
-import { IUserData } from '../../../../state_manager/interfaces';
+import { Component, ViewChild, ViewContainerRef } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { PreviewDirective } from '../../../../../../shared/src/lib/directives/preview/preview.directive';
 import { PreviewComponentComponent } from '../../../../../../shared/src/lib/directives/preview/preview-component/preview-component.component';
 import { RouterLink } from '@angular/router';
-import { routerUtility } from '../../../../../../shared/src/lib/utilities/router.utility';
 import { BaseUserCardComponent } from '../../base-user-card.component';
 
 @Component({

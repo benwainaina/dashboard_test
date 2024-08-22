@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export const queryRouterUtility = () => {

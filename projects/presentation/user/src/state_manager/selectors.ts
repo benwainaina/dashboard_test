@@ -1,5 +1,4 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { IAppSlice } from '../../../../../src/app/state_manager/interfaces';
 import { IUserData, IUserSlice, UserSliceName } from './interfaces';
 import { IDynamicObject } from '../../../shared/src/lib/state_manager/interfaces';
 
