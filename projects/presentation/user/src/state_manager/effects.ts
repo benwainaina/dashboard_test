@@ -6,7 +6,7 @@ import * as ActionNames from './actionNames';
 import * as UserActions from './actions';
 import { concatLatestFrom } from '@ngrx/operators';
 import { selectCurrentPage } from './selectors';
-import { catchError, map, mergeMap, of } from 'rxjs';
+import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { actionSetNotificationData } from '../../../shared/src/lib/state_manager/actions';
 import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
 import { IUserData } from './interfaces';
@@ -41,6 +41,32 @@ export class UserEffect {
                 payload: {
                   type: 'error',
                   message: 'Could not fetch users at the moment',
+                },
+              })
+            )
+          )
+        )
+      )
+    )
+  );
+
+  /**
+   * get specific user details
+   */
+  getUserDetails$ = createEffect(() =>
+    this._actions.pipe(
+      ofType(UserActions.actionGetUserDetails),
+      mergeMap((action) =>
+        this._apiService.get(`users/${action.userId}`, '').pipe(
+          map(({ data: userData }) =>
+            UserActions.actionSetUserDetails({ userData })
+          ),
+          catchError((err) =>
+            of(
+              actionSetNotificationData({
+                payload: {
+                  type: 'error',
+                  message: 'Could not fetch details at the moment',
                 },
               })
             )
