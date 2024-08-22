@@ -22,7 +22,7 @@ import { routerUtility } from '../../../utilities/router.utility';
   templateUrl: './preview-component.component.html',
   styleUrl: './preview-component.component.scss',
 })
-export class PreviewComponentComponent implements AfterViewInit, OnInit {
+export class PreviewComponent implements AfterViewInit, OnInit {
   @Input({ required: true }) public userId!: string;
   @Input({ required: true }) public position!: IPreviewPosition;
   @ViewChild('outlet', { static: true })

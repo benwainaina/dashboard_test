@@ -1,5 +1,5 @@
 import { Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
-import { PreviewComponentComponent } from './preview-component/preview-component.component';
+import { PreviewComponent } from './preview-component/preview-component.component';
 import { IPreviewPosition } from '../../state_manager/interfaces';
 
 @Directive({
@@ -68,9 +68,8 @@ export class PreviewDirective implements OnInit {
   }
 
   private _attachPreview(placement: IPreviewPosition): void {
-    const componentInstance = this.previewOutlet.createComponent(
-      PreviewComponentComponent
-    );
+    const componentInstance =
+      this.previewOutlet.createComponent(PreviewComponent);
     componentInstance.instance.userId = this.userId;
     componentInstance.instance.position = placement;
     componentInstance.changeDetectorRef.detectChanges();
