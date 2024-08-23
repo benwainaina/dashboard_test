@@ -10,9 +10,9 @@ import {
 } from './selectors';
 import { catchError, map, mergeMap, of } from 'rxjs';
 import { IUserData } from './interfaces';
-import { APIService } from '../../presentation/shared/src/lib/services/api.service';
+import { APIService } from '../shared/services/api.service';
 import { selectDataUtility } from '../../presentation/shared/src/lib/utilities/selectData.utility';
-import { actionSetNotificationData } from '../../presentation/shared/src/lib/state_manager/actions';
+import { actionSetNotificationData } from '../shared/actions';
 
 @Injectable({
   providedIn: 'root',

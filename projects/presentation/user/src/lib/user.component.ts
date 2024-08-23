@@ -13,7 +13,7 @@ import { routerUtility } from '../../../shared/src/lib/utilities/router.utility'
 import { AsyncPipe, NgIf, NgStyle, NgTemplateOutlet } from '@angular/common';
 import { Observable, Subject, takeUntil } from 'rxjs';
 
-import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
+import { IListDisplayItem } from '../../../../state_manager/shared/interfaces';
 import { MiniUserCardComponent } from './components/cards/mini-user-card/mini-user-card.component';
 import { ListDisplayComponent } from '../../../shared/src/lib/components/list-display/list-display.component';
 import { RouterLink } from '@angular/router';

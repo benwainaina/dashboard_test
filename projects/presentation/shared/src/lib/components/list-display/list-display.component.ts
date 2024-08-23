@@ -17,7 +17,7 @@ import {
 import {
   IDynamicObject,
   IListDisplayItem,
-} from '../../state_manager/interfaces';
+} from '../../../../../../state_manager/shared/interfaces';
 import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
 
 import { selectDataUtility } from '../../utilities/selectData.utility';

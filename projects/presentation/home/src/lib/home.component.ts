@@ -12,7 +12,7 @@ import {
   takeUntil,
 } from 'rxjs';
 import { UserCardComponent } from '../../../user/src/lib/components/cards/user-card/user-card.component';
-import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
+import { IListDisplayItem } from '../../../../state_manager/shared/interfaces';
 import { NgTemplateOutlet } from '@angular/common';
 import { selectUsersLists } from '../../../../state_manager/user/selectors';
 import { actionGetUsers } from '../../../../state_manager/user/actions';

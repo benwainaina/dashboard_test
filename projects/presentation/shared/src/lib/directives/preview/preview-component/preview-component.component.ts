@@ -6,7 +6,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { IPreviewPosition } from '../../../state_manager/interfaces';
+import { IPreviewPosition } from '../../../../../../../state_manager/shared/interfaces';
 import { renderer2Utility } from '../../../utilities/renderer2.utility';
 import { Observable } from 'rxjs';
 import { selectDataUtility } from '../../../utilities/selectData.utility';

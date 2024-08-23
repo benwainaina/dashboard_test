@@ -1,6 +1,6 @@
 import { Directive, ElementRef, inject, Input, OnInit } from '@angular/core';
 import { PreviewComponent } from './preview-component/preview-component.component';
-import { IPreviewPosition } from '../../state_manager/interfaces';
+import { IPreviewPosition } from '../../../../../../state_manager/shared/interfaces';
 
 @Directive({
   selector: '[previewDirective]',
