@@ -11,12 +11,12 @@ import {
   Subject,
   takeUntil,
 } from 'rxjs';
-import { selectUsersLists } from '../../../user/src/state_manager/selectors';
-import { actionGetUsers } from '../../../user/src/state_manager/actions';
-import { IUserData } from '../../../user/src/state_manager/interfaces';
 import { UserCardComponent } from '../../../user/src/lib/components/cards/user-card/user-card.component';
 import { IListDisplayItem } from '../../../shared/src/lib/state_manager/interfaces';
 import { NgTemplateOutlet } from '@angular/common';
+import { selectUsersLists } from '../../../../state_manager/user/selectors';
+import { actionGetUsers } from '../../../../state_manager/user/actions';
+import { IUserData } from '../../../../state_manager/user/interfaces';
 
 @Component({
   selector: 'lib-home',

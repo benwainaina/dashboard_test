@@ -4,9 +4,9 @@ import { routes } from './app.routes';
 import { provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { provideHttpClient } from '@angular/common/http';
-import { UserEffect } from '../../projects/presentation/user/src/state_manager/effects';
-import { UserSliceName } from '../../projects/presentation/user/src/state_manager/interfaces';
-import { userReducer } from '../../projects/presentation/user/src/state_manager/reducers';
+import { userReducer } from '../../projects/state_manager/user/reducers';
+import { UserSliceName } from '../../projects/state_manager/user/interfaces';
+import { UserEffect } from '../../projects/state_manager/user/effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [

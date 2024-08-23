@@ -1,4 +1,4 @@
-import { IDynamicObject } from '../../../shared/src/lib/state_manager/interfaces';
+import { IDynamicObject } from '../../presentation/shared/src/lib/state_manager/interfaces';
 
 export const UserSliceName = 'user';
 

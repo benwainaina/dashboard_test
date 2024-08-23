@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { IUserData, IUserSlice, UserSliceName } from './interfaces';
-import { IDynamicObject } from '../../../shared/src/lib/state_manager/interfaces';
+import { IDynamicObject } from '../../presentation/shared/src/lib/state_manager/interfaces';
 
 const userSlice = createFeatureSelector<IUserSlice>(UserSliceName);
 

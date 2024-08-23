@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { APIService } from '../../../shared/src/lib/services/api.service';
 import * as ActionNames from './actionNames';
 import * as UserActions from './actions';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -10,9 +9,10 @@ import {
   selectUsersLists,
 } from './selectors';
 import { catchError, map, mergeMap, of } from 'rxjs';
-import { actionSetNotificationData } from '../../../shared/src/lib/state_manager/actions';
-import { selectDataUtility } from '../../../shared/src/lib/utilities/selectData.utility';
 import { IUserData } from './interfaces';
+import { APIService } from '../../presentation/shared/src/lib/services/api.service';
+import { selectDataUtility } from '../../presentation/shared/src/lib/utilities/selectData.utility';
+import { actionSetNotificationData } from '../../presentation/shared/src/lib/state_manager/actions';
 
 @Injectable({
   providedIn: 'root',

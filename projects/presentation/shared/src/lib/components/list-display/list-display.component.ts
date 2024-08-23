@@ -19,18 +19,20 @@ import {
   IListDisplayItem,
 } from '../../state_manager/interfaces';
 import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
-import {
-  actionGetUsers,
-  actionSetCurrentPage,
-} from '../../../../../user/src/state_manager/actions';
+
 import { selectDataUtility } from '../../utilities/selectData.utility';
+
+import { filter, firstValueFrom, take } from 'rxjs';
+import { renderer2Utility } from '../../utilities/renderer2.utility';
 import {
   selectCurrentPage,
   selectIsFetchingUserData,
   selectIsFetchingUsers,
-} from '../../../../../user/src/state_manager/selectors';
-import { filter, firstValueFrom, take } from 'rxjs';
-import { renderer2Utility } from '../../utilities/renderer2.utility';
+} from '../../../../../../state_manager/user/selectors';
+import {
+  actionGetUsers,
+  actionSetCurrentPage,
+} from '../../../../../../state_manager/user/actions';
 
 @Component({
   selector: 'app-list-display',

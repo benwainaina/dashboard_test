@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { firstValueFrom, Observable } from 'rxjs';
 import { selectDataUtility } from '../../utilities/selectData.utility';
+
+import { AsyncPipe } from '@angular/common';
+import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
+
+import { FormsModule } from '@angular/forms';
 import {
   selectCurrentPage,
   selectTotalPages,
-} from '../../../../../user/src/state_manager/selectors';
-import { AsyncPipe } from '@angular/common';
-import { dispatchActionUtility } from '../../utilities/dispatchAction.utility';
+} from '../../../../../../state_manager/user/selectors';
 import {
   actionGetUsers,
   actionSetCurrentPage,
-} from '../../../../../user/src/state_manager/actions';
-import { FormsModule } from '@angular/forms';
+} from '../../../../../../state_manager/user/actions';
 
 @Component({
   selector: 'app-pages-component',

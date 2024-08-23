@@ -9,11 +9,11 @@ import {
 import { IPreviewPosition } from '../../../state_manager/interfaces';
 import { renderer2Utility } from '../../../utilities/renderer2.utility';
 import { Observable } from 'rxjs';
-import { IUserData } from '../../../../../../user/src/state_manager/interfaces';
 import { selectDataUtility } from '../../../utilities/selectData.utility';
-import { selectPreviewUserData } from '../../../../../../user/src/state_manager/selectors';
 import { AsyncPipe, NgStyle } from '@angular/common';
 import { routerUtility } from '../../../utilities/router.utility';
+import { IUserData } from '../../../../../../../state_manager/user/interfaces';
+import { selectPreviewUserData } from '../../../../../../../state_manager/user/selectors';
 
 @Component({
   selector: 'app-preview-component',
